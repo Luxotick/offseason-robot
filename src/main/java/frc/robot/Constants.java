@@ -14,18 +14,22 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
+    public static class OperatorConstants {
+      public static final int kDriverControllerPort = 0;
+    }
     public static final class CANIDConstants{
-        public static final int leftLeadMotorID = 13;
-        public static final int leftFollowMotorID = 14;
-        public static final int rightLeadMotorID = 11;
-        public static final int rightFollowMotorID = 12;
+      public static final int leftLeadMotorID = 13;
+      public static final int leftFollowMotorID = 14;
+      public static final int rightLeadMotorID = 11;
+      public static final int rightFollowMotorID = 12;
     }
 
-    public static final class controls{
+    public static final class Controls{
         CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+    }
+
+    public static final class Config {
+      public static final double MaxSpeed = 3.0;
     }
 
     public static final int DRIVER_CONTROLLER_MOVE_AXIS = 1;
