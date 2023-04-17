@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
+
 public class arcadeDrive extends CommandBase {
   /** Creates a new arcadeDrive. */
 
+  SlewRateLimiter filter = new SlewRateLimiter(1.5);
 
   public arcadeDrive() {
     addRequirements(RobotContainer.m_drivetrain);
@@ -24,10 +27,12 @@ public class arcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double moveSpeed = -RobotContainer.m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_MOVE_AXIS);
-    double rotateSpeed = RobotContainer.m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_ROTATE_AXIS);
+    double moveSpeed = -RobotContainer.m_driverController.getLeftY();
+    double rotateSpeed = -RobotContainer.m_driverController.getRightX();
+
+    RobotContainer.m_drivetrain.arcadeDrive(filter.calculate(moveSpeed), rotateSpeed);
     
-    RobotContainer.m_drivetrain.arcadeDrive(moveSpeed, rotateSpeed);
+    //(moveSpeed, rotateSpeed);
 
   }
 

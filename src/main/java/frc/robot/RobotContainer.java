@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.robot.Constants.Config;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
@@ -14,17 +15,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
+
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static final Drivetrain m_drivetrain = new Drivetrain();
 
-  private final arcadeDrive drive = new arcadeDrive();
+  private final SlewRateLimiter m_speedLimiter = new SlewRateLimiter(Config.MaxSpeed);
+  private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(Config.MaxRotSpeed);
 
   public static CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort); 
-
+      new CommandXboxController(OperatorConstants.kDriverControllerPort);  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -41,6 +44,8 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

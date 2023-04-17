@@ -29,10 +29,10 @@ public final class Constants {
     }
 
     public static final class Config {
-      public static final double MaxSpeed = 3.0;
+      public static final double MaxSpeed = 0.6 ;
+      public static final double MaxRotSpeed = 0.5;
     }
 
-    public static final int DRIVER_CONTROLLER_MOVE_AXIS = 1;
-    public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 2;
+
 
 }
